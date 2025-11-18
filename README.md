@@ -1,4 +1,4 @@
-<!-- Arch -->
+# arch
 
 `install`
 
@@ -21,80 +21,91 @@ nmcli r wifi on
 nmcli d wifi list
 nmcli d wifi connect <name> password <password>
 ```
-
-`programs`
-
-```bash
+             
+`programs`   
+             
+```bash      
 sudo pacman -Syu
-sudo pacman -S git alacritty docker ufw
-sudo pacman -Rsn nano grim htop
-
-sudo pacman -S nerd-fonts
+sudo pacman -S alacritty git helix hyprshot rofi ufw yazi starship swww cronie
+sudo pacman -Rsn nano htop kitty dolphin wofi 
+             
+# sudo pacman -S nerd-fonts
 # JetBrains (42) + Nerd Font Icons (53)
-```
-
-`rust`
-
-```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
-
-`ufw`
-
-```bash
+```          
+             
+`yay`        
+             
+```bash      
+y.git && cd yay && makepkg -sise-devel && git clone https://aur.archlinux.org/ya--More--(36%)
+             
+yay -S google-chrome
+yay -S aseprite
+```          
+             
+`ufw`        
+             
+```bash      
 sudo ufw enable
-```
-
-`bluetooth`
-
-```bash
-# config
-sudo systemctl start bluetooth.service
-sudo systemctl enable bluetooth.service
-bluetoothctl
-
-# init
-power on
-agent on
-default-agent
-scan on
-devices
-trust <code name - reference to device>
-pair <code name - reference to device>
-connect <code name - reference to device>
-```
-
-`starship`
-
-```bash
+```          
+             
+`rust`       
+             
+```bash      
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```          
+             
+`starship`   
+             
+```bash      
 helix ~/.bashrc
 eval "$(starship init bash)"
-```
-
-`git`
-
-```bash
-# config
+```          
+             
+`git`        
+             
+```bash      
+# config     
 git config --global user.name "name"
 git config --global user.email "@email"
 ssh-keygen -t ed25519 -C "your_email@example.com"
-
+             
 # enter ... enter
-
-cd
+             
+cd           
 cd .ssh/ > acess id_ed25519.pub
 more id_ed25519.pub
-
-# git
+             
+# git        
 # copy > github > settings > SSH and GPG keys > new SSH > paste > add
-# github > create repository > copy > SSH git@github.com: ... > paste git clone git@github.com: ... > yes
-```
+git@github.com: ... > yesory > copy > SSH git@github.com: ... > paste git clone --More--(78%)
+```          
+             
+`bluetooth`  
+             
+```bash      
+# config     
+sudo systemctl start bluetooth.service
+sudo systemctl enable bluetooth.service
+bluetoothctl 
+             
+# init       
+power on     
+agent on     
+default-agent
+scan on      
+devices      
+trust <code name - reference to device>
+pair <code name - reference to device>
+connect <code name - reference to device>
+```          ``
 
-`yay`
+`cronie`
 
 ```bash
-sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+sudo systemctl start cronie.service
+sudo systemctl enable cronie.service
+systemctl status cronie.service
 
-yay -S google-chrome
-yay -S aseprite
+EDITOR=helix crontab -e
+* */3 * * * WAYLAND_DISPLAY=wayland-1 XDG_RUNTIME_DIR=/run/user/1000 /home/user/.config/swww/swww.sh
 ```
