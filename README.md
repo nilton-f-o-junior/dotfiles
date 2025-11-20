@@ -1,4 +1,4 @@
-# arch
+no# arch
 
 `install`
 
@@ -97,7 +97,7 @@ devices
 trust <code name - reference to device>
 pair <code name - reference to device>
 connect <code name - reference to device>
-```          ``
+```
 
 `cronie`
 
