@@ -107,5 +107,5 @@ sudo systemctl enable cronie.service
 systemctl status cronie.service
 
 EDITOR=helix crontab -e
-* */3 * * * WAYLAND_DISPLAY=wayland-1 XDG_RUNTIME_DIR=/run/user/1000 /home/user/.config/swww/swww.sh
+0 */3 * * * WAYLAND_DISPLAY=wayland-1 XDG_RUNTIME_DIR=/run/user/1000 /home/user/.config/swww/swww.sh
 ```
