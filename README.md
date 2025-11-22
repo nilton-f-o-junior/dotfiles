@@ -1,4 +1,4 @@
-no# arch
+# arch
 
 `install`
 
@@ -97,6 +97,14 @@ devices
 trust <code name - reference to device>
 pair <code name - reference to device>
 connect <code name - reference to device>
+```
+
+`swww`
+
+```rust
+swww-daemon &
+mkdir .config/swww/background
+swww img ~/.config/swww/background/astralgrave0.png
 ```
 
 `cronie`
