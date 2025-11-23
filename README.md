@@ -2,8 +2,6 @@
 	<img src="img/dotfiles-logo.png">
 </p>
 
-# arch
-
 `install`
 
 ```bash
