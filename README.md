@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="img/rust-logo.png">
+	<img src="img/dotfiles-logo.png">
 </p>
 
 # arch
