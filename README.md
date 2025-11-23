@@ -1,3 +1,7 @@
+<p align="center">
+	<img src="img/rust-logo.png">
+</p>
+
 # arch
 
 `install`
