@@ -38,7 +38,7 @@ sudo pacman -Rsn nano htop kitty dolphin wofi
 `yay`        
              
 ```bash      
-y.git && cd yay && makepkg -sise-devel && git clone https://aur.archlinux.org/ya--More--(36%)
+sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
              
 yay -S google-chrome
 yay -S aseprite
@@ -79,7 +79,7 @@ more id_ed25519.pub
              
 # git        
 # copy > github > settings > SSH and GPG keys > new SSH > paste > add
-git@github.com: ... > yesory > copy > SSH git@github.com: ... > paste git clone --More--(78%)
+github > create repository > copy > SSH git@github.com: ... > paste git clone git@github.com: ... > yes
 ```          
              
 `bluetooth`  
