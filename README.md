@@ -28,11 +28,11 @@ nmcli d wifi connect <name> password <password>
              
 ```bash      
 sudo pacman -Syu
-sudo pacman -S alacritty git helix hyprshot rofi ufw yazi starship swww cronie
-sudo pacman -Rsn nano htop kitty dolphin wofi 
+sudo pacman -S alacritty git helix rofi ufw starship
+sudo pacman -Rsn nano htop foot wmenu vim
              
-# sudo pacman -S nerd-fonts
-# JetBrains (42) + Nerd Font Icons (53)
+sudo pacman -S nerd-fonts
+# JetBrains (44) + Nerd Font Icons (54)
 ```          
              
 `yay`        
@@ -99,14 +99,6 @@ devices
 trust <code name - reference to device>
 pair <code name - reference to device>
 connect <code name - reference to device>
-```
-
-`swww`
-
-```rust
-swww-daemon &
-mkdir .config/swww/background
-swww img ~/.config/swww/background/astralgrave0.png
 ```
 
 `cronie`

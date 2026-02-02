@@ -1,50 +1,49 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[](color_orange)\
+[](color_pink_bold)\
 $os\
 
-[](bg:color_yellow fg:color_orange)\
+[](bg:color_peach fg:color_pink_bold)\
 $directory\
 
-[](fg:color_yellow bg:color_aqua)\
+[](fg:color_peach bg:color_purple)\
 $git_branch\
 $git_status\
 
-[](fg:color_aqua bg:color_blue)\
+[](fg:color_purple bg:color_teal)\
 $rust\
 $python\
 
-[](fg:color_blue bg:color_bg3)\
+[](fg:color_teal bg:color_deep_wine)\
 $docker_context\
 $conda\
 $pixi\
 
-[](fg:color_bg3 bg:color_bg1)\
+[](fg:color_deep_wine bg:color_dark_purple)\
 $time\
 
-[ ](fg:color_bg1)\
+[ ](fg:color_dark_purple)\
 $line_break$character"""
 
 add_newline = true
 
-palette = 'gruvbox_dark'
+palette = 'magical_palette'
 
-[palettes.gruvbox_dark]
-color_fg0 = '#4c4f69'
-color_bg1 = '#f5e0dc'
-color_bg3 = '#f5c2e7'
-color_blue = '#8aadf4'
-color_aqua = '#91d7e3'
-color_green = '#a6da95'
-color_orange = '#f5a97f'
-color_purple = '#c6a0f6'
-color_red = '#ed8796'
-color_yellow = '#eed49f'
+[palettes.magical_palette]
+# Seleção das cores enviadas para melhor harmonia:
+color_light_pink = '#fde6ee' # Texto muito claro
+color_peach      = '#f6cdcb' # Fundo diretório
+color_pink_bold  = '#ff3e8b' # Rosa vibrante (OS/User)
+color_purple     = '#ae72d4' # Roxo médio (Git)
+color_teal       = '#527e81' # Cerceta/Azul escuro (Linguagens)
+color_deep_wine  = '#76445f' # Vinho (Docker)
+color_dark_purple = '#47324E' # (Baseado na anterior para fechamento escuro)
+color_yellow     = '#fbbf2d' # Amarelo (Avisos)
 
 [os]
 disabled = false
-style = "bg:color_orange fg:color_fg0"
+style = "bg:color_pink_bold fg:color_light_pink"
 
 [os.symbols]
 Linux = "󰌽"
@@ -52,61 +51,47 @@ Arch = "󰼁 "
 
 [username]
 show_always = true
-style_user = "bg:color_orange fg:color_fg0"
-style_root = "bg:color_orange fg:color_fg0"
+style_user = "bg:color_pink_bold fg:color_light_pink"
+style_root = "bg:color_pink_bold fg:color_light_pink"
 format = '[ $user ]($style)'
 
 [directory]
-style = "fg:color_fg0 bg:color_yellow"
+style = "fg:color_pink_bold bg:color_peach"
 format = "[ $path ]($style)"
 truncation_length = 3
-truncation_symbol = "…/"
-
-[directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = "󰝚 "
-"Pictures" = " "
-"Developer" = "󰲋 "
 
 [git_branch]
 symbol = ""
-style = "bg:color_aqua"
-format = '[[ $symbol $branch ](fg:color_fg0 bg:color_aqua)]($style)'
+style = "bg:color_purple"
+format = '[[ $symbol $branch ](fg:color_light_pink bg:color_purple)]($style)'
 
 [git_status]
-style = "bg:color_aqua"
-format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)'
+style = "bg:color_purple"
+format = '[[($all_status$ahead_behind )](fg:color_light_pink bg:color_purple)]($style)'
 
 [rust]
 symbol = " "
-style = "bg:color_blue"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+style = "bg:color_teal"
+format = '[[ $symbol( $version) ](fg:color_peach bg:color_teal)]($style)'
 
 [python]
 symbol = ""
-style = "bg:color_blue"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+style = "bg:color_teal"
+format = '[[ $symbol( $version) ](fg:color_peach bg:color_teal)]($style)'
 
 [docker_context]
 symbol = ""
-style = "bg:color_bg3"
-format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'
+style = "bg:color_deep_wine"
+format = '[[ $symbol( $context) ](fg:color_light_pink bg:color_deep_wine)]($style)'
 
 [time]
 disabled = false
 time_format = "%R"
-style = "bg:color_bg1"
-format = '[[ $time ](fg:color_fg0 bg:color_bg1)]($style)'
-
-[line_break]
-disabled = false
+style = "bg:color_dark_purple"
+format = '[[ $time ](fg:color_light_pink bg:color_dark_purple)]($style)'
 
 [character]
 disabled = false
-success_symbol = '[](bold fg:color_green)'
-error_symbol = '[](bold fg:color_red)'
-vimcmd_symbol = '[](bold fg:color_green)'
-vimcmd_replace_one_symbol = '[](bold fg:color_purple)'
-vimcmd_replace_symbol = '[](bold fg:color_purple)'
-vimcmd_visual_symbol = '[](bold fg:color_yellow)'
+success_symbol = '[](bold fg:color_pink_bold)'
+error_symbol = '[](bold fg:color_yellow)'
+vimcmd_symbol = '[](bold fg:color]'
