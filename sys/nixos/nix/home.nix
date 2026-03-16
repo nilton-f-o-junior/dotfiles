@@ -12,8 +12,9 @@
 	programs.bash = {
 		enable = true;
 		shellAliases = {
+			collegarb = "sudo nix-collect-garbage -d";
 			rebuild = "sudo nixos-rebuild switch --flake .";
-			collegarb = "sudo nix-collect-garbage -d";			
+		
 		};
 	};
 
@@ -42,15 +43,22 @@
 	};
 	
 	home.packages = with pkgs; [
-		# rust stack
-		rustc
+		# rust
 		cargo
-		rustfmt
 		clippy
 		gcc
+		mdbook
+		rustc
+		rust-analyzer
+		rustfmt
 
-		# programs	
+		# language serve
+		marksman
+
+		# programs
+		alacritty
 	  firefox
+	  glow
 		helix
 		starship
 		swaybg
