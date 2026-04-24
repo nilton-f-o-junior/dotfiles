@@ -1,68 +1,66 @@
 # home
 
-{ config, pkgs, ... }: 
+{ config, pkgs, ... }:
 
 {
-	home.username = "user";
-	home.homeDirectory = "/home/user";
-	home.stateVersion = "25.11";
+  home.username = "user";
+  home.homeDirectory = "/home/user";
+  home.stateVersion = "25.11";
 
-	programs.starship.enable = true;
-		
-	programs.bash = {
-		enable = true;
-		shellAliases = {
-			collegarb = "sudo nix-collect-garbage -d";
-			rebuild = "sudo nixos-rebuild switch --flake .";
-		
-		};
-	};
+  imports = [
+    ./helix/helix.nix
+    ./starship/starship.nix
+    ./wezterm/wezterm.nix
+  ];
 
-	programs.git = {
-		enable = true;
-		userName = "nilton-f-o-junior";
-		userEmail = "nilton.f.o.junior@gmail.com";
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+      collegarb = "sudo nix-collect-garbage -d";
+      rebuild = "sudo nixos-rebuild switch --flake .";
+    };
+  };
 
-		extraConfig = {
-			init.defaultBranch = "main";
-			pull.rebase = false;
-		};
-	};
+  programs.git = {
+    enable = true;
+    userName = "nilton-f-o-junior";
+    userEmail = "nilton.f.o.junior@gmail.com";
 
-	programs.ssh = {
-  	enable = true;
-  	addKeysToAgent = "yes";
+    extraConfig = {
+      init.defaultBranch = "main";
+      pull.rebase = false;
+    };
+  };
 
-  	matchBlocks = {
-    	"github.com" = {
-     	 hostname = "github.com";
-     	 user = "git";
-     	 identityFile = "~/.ssh/id_ed25519";
-    	};
-  	};
-	};
-	
-	home.packages = with pkgs; [
-		# rust
-		cargo
-		clippy
-		gcc
-		mdbook
-		rustc
-		rust-analyzer
-		rustfmt
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";
 
-		# language serve
-		marksman
+    matchBlocks = {
+      "github.com" = {
+        hostname = "github.com";
+        user = "git";
+        identityFile = "~/.ssh/id_ed25519";
+      };
+    };
+  };
 
-		# programs
-		alacritty
-	  firefox
-	  glow
-		helix
-		starship
-		swaybg
-		rofi
-	];
-	
+  home.packages = with pkgs; [
+    # applications
+    swaybg
+    rofi
+
+    # rust
+    cargo
+    clippy
+    gcc
+    mdbook
+    rustc
+    rust-analyzer
+    rustfmt
+
+    # language serve
+    marksman
+  ];
+
 }

@@ -31,7 +31,7 @@
 
 
   # Select internationalisation properties
-  # i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "pt_BR.UTF-8";
   # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
@@ -41,7 +41,8 @@
 
   # Display
   services.displayManager.ly.enable = true;
-  programs.niri.enable = true;	
+  programs.niri.enable = true;
+  programs.xwayland.enable = true;
 
 
   # Wayland
@@ -60,6 +61,7 @@
   # Enable sound
   services.pipewire = {
      enable = true;
+     alsa.enable = true;
      pulse.enable = true;
   };
 
@@ -76,11 +78,13 @@
 
   # List packages installed in system profile
   environment.systemPackages = with pkgs; [
-     wezterm
+     #
+     firefox
      git
+     helix
      vim
-     xwayland
      wget
+     wezterm
   ];
 
 
@@ -97,10 +101,6 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-
-  # Git
-  programs.git.enable = true;
-  
 
   # Allow
   nixpkgs.config.allowUnfree = true;
