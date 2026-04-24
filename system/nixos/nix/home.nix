@@ -8,9 +8,9 @@
   home.stateVersion = "25.11";
 
   imports = [
-    ./helix/helix.nix
-    ./starship/starship.nix
-    ./wezterm/wezterm.nix
+    ./config/helix.nix
+    ./config/starship.nix
+    ./config/wezterm.nix
   ];
 
   programs.bash = {
