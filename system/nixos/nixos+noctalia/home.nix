@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }: # <-- pkgs-unstable adicionado
 
 {
   home.username      = "user";
@@ -15,7 +15,7 @@
   home.file.".config/niri/config.kdl".source          = ./config/niri.kdl;
   # home.file.".config/niri/wallpaper_script.sh".source = ./config/wallpaper_script.sh;
   # home.file.".config/niri/wallpaper" = {
-  #   source   = ./config/wallpaper;
+  #   source    = ./config/wallpaper;
   #   recursive = true;
   # };
 
@@ -53,7 +53,7 @@
       };
     };
   };
-
+  
   # pacotes
   home.packages = with pkgs; [
     # app
@@ -71,5 +71,8 @@
 
     # extensao
     marksman
+
+    # noctalia
+    pkgs-unstable.noctalia-shell # <-- linha adicionada
   ];
 }

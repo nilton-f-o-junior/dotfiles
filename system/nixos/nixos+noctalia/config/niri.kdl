@@ -92,6 +92,7 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 // spawn-at-startup "/home/user/.config/niri/wallpaper_script.sh"
+spawn-at-startup "noctalia-shell"
 // spawn-at-startup "waybar"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -142,6 +143,7 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Terminal: wezterm" { spawn "wezterm"; }
     Mod+D hotkey-overlay-title="Application: rofi" { spawn "rofi" "-show" "drun" "-show-icons"; }
+    Mod+S { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
