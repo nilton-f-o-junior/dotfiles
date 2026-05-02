@@ -1,3 +1,4 @@
+# flake.nix
 {
   description = "nixos";
 
@@ -18,7 +19,7 @@
   in {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = { inherit pkgs-unstable; };
+      specialArgs = { inherit pkgs-unstable; };  # já está assim no seu flake
       modules = [
         ./configuration.nix
         home-manager.nixosModules.home-manager
@@ -27,6 +28,7 @@
             useGlobalPkgs       = true;
             useUserPackages     = true;
             backupFileExtension = "backup";
+            extraSpecialArgs    = { inherit pkgs-unstable; };  # <-- adicionar essa linha
             users.user          = import ./home.nix;
           };
         }

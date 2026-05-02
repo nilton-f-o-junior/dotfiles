@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }: # <-- pkgs-unstable adicionado
+
 
 {
+
   home.username      = "user";
   home.homeDirectory = "/home/user";
   home.stateVersion  = "25.11";
@@ -11,15 +13,17 @@
     ./config/wezterm.nix
   ];
 
+
   # niri
   home.file.".config/niri/config.kdl".source          = ./config/niri.kdl;
   # home.file.".config/niri/wallpaper_script.sh".source = ./config/wallpaper_script.sh;
   # home.file.".config/niri/wallpaper" = {
-  #   source   = ./config/wallpaper;
+  #   source    = ./config/wallpaper;
   #   recursive = true;
   # };
 
-  #
+
+  # bash
   programs.bash = {
     enable = true;
     shellAliases = {
@@ -27,6 +31,7 @@
       rebuild   = "sudo nixos-rebuild switch --flake .";
     };
   };
+
 
   # git
   programs.git = {
@@ -39,6 +44,7 @@
       pull.rebase        = false;
     };
   };
+
 
   # ssh
   programs.ssh = {
@@ -54,11 +60,27 @@
     };
   };
 
+  
   # pacotes
   home.packages = with pkgs; [
-    # app
-    swaybg
-    rofi
+
+    # cli
+    gemini-cli
+
+    # extensoes
+    marksman                                  # Markdown
+    markdown-oxide                            # Markdown LSP - PKM/obsidian-style
+    rumdl 
+    taplo                                     # TOML
+
+    # noctalia
+    pkgs-unstable.noctalia-shell
+
+    # python
+    python312
+    python312Packages.pip
+    python312Packages.virtualenv
+    python312Packages.python-lsp-server       # pylsp
 
     # rust
     cargo
@@ -68,8 +90,13 @@
     rustc
     rust-analyzer
     rustfmt
-
-    # extensao
-    marksman
+    
+    # web
+    nodejs_22
+    nodePackages.pnpm
+    nodePackages.typescript-language-server
+    nodePackages.vscode-langservers-extracted  # HTML + CSS + JSON LSP
+    nodePackages.prettier
+    
   ];
 }

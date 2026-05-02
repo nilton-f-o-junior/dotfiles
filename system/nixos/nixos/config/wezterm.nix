@@ -62,8 +62,8 @@
           action = wezterm.action.SpawnTab 'CurrentPaneDomain',
         },
         {
-          key = 'x',
-          mods = 'CTRL|SHIFT',
+          key = 'w',
+          mods = 'CTRL',
           action = wezterm.action.CloseCurrentTab { confirm = true },
         },
       }
