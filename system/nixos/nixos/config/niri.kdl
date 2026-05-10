@@ -131,12 +131,18 @@ layer-rule {
 // key binds
 binds {
 
+    //
     Mod+Shift+Slash { show-hotkey-overlay; }
-
-    // pages
-    Super+Alt+Y { spawn "firefox" "https://www.youtube.com"; }
-    Super+Alt+G { spawn "firefox" "https://github.com/nilton-f-o-junior?tab=repositories"; }
-    Super+Alt+C { spawn "firefox" "https://claude.ai/new"; } 
+    Super+Alt+C hotkey-overlay-title="Claude" { spawn "firefox" "https://claude.ai/new"; }
+    Super+Alt+D hotkey-overlay-title="Drive" { spawn "firefox" "https://drive.google.com/drive/home"; }
+    Super+Alt+E hotkey-overlay-title="Gemini" { spawn "firefox" "https://gemini.google.com/app?hl=pt-BR"; }
+    Super+Alt+G hotkey-overlay-title="GitHub" { spawn "firefox" "https://github.com/nilton-f-o-junior?tab=repositories"; }
+    Super+Alt+I hotkey-overlay-title="Gmail" { spawn "firefox" "https://mail.google.com/mail/u/0/#inbox"; }
+    Super+Alt+N hotkey-overlay-title="NotebookLLM" { spawn "firefox" "https://notebooklm.google.com/?icid=home_maincta&_gl=1*t515a8*_up*MQ..*_ga*OTA0NTEz
+OTA0LjE3Nzg0MTEwMjI.*_ga_W0LDH41ZCB*czE3Nzg0MTEwMjEkbzEkZzEkdDE3Nzg0MTEwMzIkajQ5JGwwJGgw&gclid=Cj0KCQjw2YDQBhD_ARIsAE1qeSeprByYN02T1P2oIGxZqQCWRMya-gDwop
+O2s6WJRPo8hi7_ulSdKdAaAp_YEALw_wcB&pli=1"; }
+    Super+Alt+Y hotkey-overlay-title="Youtube" { spawn "firefox" "https://www.youtube.com"; }
+    // Super+Alt+  { spawn "" ""; }
      
     // for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Terminal: wezterm" { spawn "wezterm"; }
