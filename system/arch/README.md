@@ -147,3 +147,13 @@ for f in cmake-gui avahi-discover bssh bvnc nm-connection-editor qv4l2 qvidcap; 
   echo -e "\nNoDisplay=true" >> ~/.local/share/applications/$f.desktop
 done
 ```
+
+`Web`
+
+```bash
+# web
+sudo pacman -S nodejs npm
+
+# cypress
+sudo pacman -S gtk3 libnotify nss libxtst xorg-server-xvfb at-spi2-core libxss alsa-lib
+```
