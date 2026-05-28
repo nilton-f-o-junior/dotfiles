@@ -26,8 +26,8 @@ nmcli d wifi connect <name> password <password>
 
 ```bash
 sudo pacman -Syu
-sudo pacman -S git helix htop fuzzel rofi vim starship swaybg swayidle swaylock waybar
-sudo pacman -Rsn nano htop foot wmenu vim
+sudo pacman -S git helix starship eza
+sudo pacman -Rsn nano htop foot wmenu vim fuzzel rofi swaybg swayidle swaylock waybar
 
 sudo pacman -S nerd-fonts
 # JetBrains (44) + Nerd Font Icons (54)
@@ -87,6 +87,16 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```bash
 helix ~/.bashrc
 eval "$(starship init bash)"
+```
+
+`eza`
+
+```bash
+helix ~/.bashrc
+alias ls='eza --icons=always --color=always'
+alias ll='eza -la --icons=always --git'
+alias lt='eza --tree --icons=always'
+source ~/.bashrc
 ```
 
 `git`
