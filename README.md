@@ -95,11 +95,21 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 #### 11. Starship
 
 ```bash
-# Adicionar ao ~/.bashrc
+helix ~/.bashrc
 eval "$(starship init bash)"
 ```
 
-#### 12. Git & SSH
+#### 12. Eza
+
+```bash
+helix ~/.bashrc
+alias ls='eza --icons=always --color=always'
+alias ll='eza -la --icons=always --git'
+alias lt='eza --tree --icons=always'
+source ~/.bashrc
+```
+
+#### 13. Git & SSH
 
 ```bash
 git config --global user.name "seu-nome"
@@ -112,7 +122,7 @@ cat ~/.ssh/id_ed25519.pub
 # GitHub → Settings → SSH and GPG keys → New SSH key → colar → Add
 ```
 
-#### 13. Bluetooth
+#### 14. Bluetooth
 
 ```bash
 sudo systemctl enable --now bluetooth.service
@@ -130,7 +140,7 @@ pair <device-id>
 connect <device-id>
 ```
 
-#### 14. Menu de Aplicativos
+#### 15. Menu de Aplicativos
 
 ```bash
 mkdir -p ~/.local/share/applications
@@ -146,7 +156,7 @@ done
 update-desktop-database ~/.local/share/applications
 ```
 
-#### 15. Nautilus
+#### 16. Nautilus
 
 ```bash
 # install
