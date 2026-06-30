@@ -45,6 +45,11 @@ sudo pacman -Syu
 sudo pacman -S git helix starship eza
 sudo pacman -Rsn nano htop vim fuzzel rofi swaybg swayidle swaylock waybar
 ```
+
+```bash
+sudo pacman -S nerd-fonts
+```
+
 > **Fontes Nerd Fonts:** JetBrains Mono (44) + Nerd Font Icons (54)
 
 #### 5. AUR (yay)
