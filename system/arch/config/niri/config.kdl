@@ -118,7 +118,7 @@ animations {
 
 
 window-rule {
-    match app-id="Alacritty"
+    match app-id="Wezterm"
 }
 
 window-rule {
@@ -151,7 +151,7 @@ O2s6WJRPo8hi7_ulSdKdAaAp_YEALw_wcB&pli=1"; }
     // Super+Alt+  { spawn "" ""; }
 
 
-    Mod+T hotkey-overlay-title="Terminal: alacritty" { spawn "alacritty"; }
+    Mod+T hotkey-overlay-title="Terminal: Wezterm" { spawn "wezterm"; }
     Mod+S { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
 
