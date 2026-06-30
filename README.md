@@ -1,21 +1,16 @@
 <p align="center">
-	<img src="img/dotfiles-logo.png">
+    <img src="img/dotfiles-logo.png">
 </p>
 
 
-## Ambientes
+## Ambiente
 
-| | Arch Linux + Sway | NixOS + Niri |
-|---|---|---|
-| **Foco** | Desenvolvimento web | Baixo nível |
-| **Editores** | Helix, Zed, VSCode | Helix |
-| **Extras** | Node.js, Python, Chrome, Aseprite | Rust |
+| | Arch Linux + Niri + Noctalia Shell |
+|---|---|
+| **Foco** | Desenvolvimento web / Geral |
+| **Editores** | Helix, OpenCode |
 
 ---
-
-## Arch Linux + Sway
-
-Ambiente completo para desenvolvimento web com múltiplos editores e ferramentas de frontend/backend.
 
 ### Instalação
 
@@ -47,44 +42,59 @@ nmcli d wifi connect <nome-da-rede> password <senha>
 
 ```bash
 sudo pacman -Syu
-sudo pacman -S alacritty git helix rofi ufw starship nerd-fonts
-sudo pacman -Rsn nano htop foot wmenu vim
+sudo pacman -S git helix starship eza
+sudo pacman -Rsn nano htop vim fuzzel rofi swaybg swayidle swaylock waybar
 ```
 > **Fontes Nerd Fonts:** JetBrains Mono (44) + Nerd Font Icons (54)
 
 #### 5. AUR (yay)
 
 ```bash
-sudo pacman -S --needed git base-devel
-git clone https://aur.archlinux.org/yay.git
-cd yay && makepkg -si
+sudo pacman -S --needed git base-devel git clone https://aur.archlinux.org/yay.git cd yay && makepkg -si
 ```
+
+#### 6. AUR (paru)
 
 ```bash
-yay -S google-chrome
-yay -S aseprite
+sudo pacman -S --needed git base-devel git clone https://aur.archlinux.org/paru.git cd paru && makepkg -si
 ```
 
-#### 6. Firewall
+#### 7. Aplicativos (AUR)
+
+```bash
+paru -S google-chrome
+paru -S aseprite
+paru -S wezterm-nightly-bin
+```
+
+#### 8. Noctalia Shell
+
+```bash
+paru -S noctalia-shell
+qs -c noctalia-shell
+```
+
+#### 9. Firewall
 
 ```bash
 sudo ufw enable
 ```
 
-#### 7. Rust
+#### 10. Rust
 
 ```bash
+sudo pacman -Rns rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
-#### 8. Starship
+#### 11. Starship
 
 ```bash
 # Adicionar ao ~/.bashrc
 eval "$(starship init bash)"
 ```
 
-#### 9. Git & SSH
+#### 12. Git & SSH
 
 ```bash
 git config --global user.name "seu-nome"
@@ -97,7 +107,7 @@ cat ~/.ssh/id_ed25519.pub
 # GitHub → Settings → SSH and GPG keys → New SSH key → colar → Add
 ```
 
-#### 10. Bluetooth
+#### 13. Bluetooth
 
 ```bash
 sudo systemctl enable --now bluetooth.service
@@ -114,102 +124,45 @@ trust <device-id>
 pair <device-id>
 connect <device-id>
 ```
----
 
-## NixOS + Niri
-
-Ambiente focado em baixo nível, DevOps e projetos paralelos — gerenciado declarativamente via Nix Flakes.
-
-### Instalação
-
-#### 1. Conectar ao Wi-Fi (live ISO)
+#### 14. Menu de Aplicativos
 
 ```bash
-nmtui
+mkdir -p ~/.local/share/applications
+
+# copiar todos os arquivos .desktop (incluindo o lstopo)
+cp /usr/share/applications/cmake-gui.desktop    /usr/share/applications/avahi-discover.desktop    /usr/share/applications/bssh.desktop    /usr/share/applications/bvnc.desktop    /usr/share/applications/nm-connection-editor.desktop    /usr/share/applications/qv4l2.desktop    /usr/share/applications/qvidcap.desktop    /usr/share/applications/lstopo.desktop    ~/.local/share/applications/
+
+# loop para ocultar os aplicativos adicionando NoDisplay=true
+for f in cmake-gui avahi-discover bssh bvnc nm-connection-editor qv4l2 qvidcap lstopo; do
+  echo -e "\nNoDisplay=true" >> ~/.local/share/applications/$f.desktop
+done
+
+update-desktop-database ~/.local/share/applications
 ```
 
-#### 2. Particionar o disco
+#### 15. Nautilus
 
 ```bash
-lsblk
-cfdisk /dev/sda
-```
+# install
+sudo pacman -S xdg-desktop-portal-gtk
 
-Layout GPT:
+# conf
+# ~/.config/xdg-desktop-portal/portals.conf
+# [preferred]
+# default=gtk
+# org.freedesktop.impl.portal.FileChooser=gtk
 
-| Partição | Tamanho | Tipo |
-|---|---|---|
-| `/dev/sda1` | 1G | EFI System |
-| `/dev/sda2` | Restante | Linux filesystem |
+# dbus
+mkdir -p ~/.local/share/dbus-1/services/
+ln -s /dev/null ~/.local/share/dbus-1/services/org.freedesktop.FileManager1.service
 
-#### 3. Formatar e montar
+# remove
+sudo pacman -R xdg-desktop-portal-gnome nautilus
 
-```bash
-mkfs.fat -F 32 -n boot /dev/sda1
-mkfs.ext4 -L nixos /dev/sda2
+# verifica
+sudo pacman -S --needed xdg-desktop-portal-gtk
 
-mount /dev/sda2 /mnt
-mount --mkdir /dev/sda1 /mnt/boot
-```
-
-#### 4. Gerar configuração
-
-```bash
-nixos-generate-config --root /mnt
-cd /mnt/etc/nixos
-touch flake.nix home.nix
-# copiar as configs do repositório
-```
-
-#### 5. Instalar
-
-```bash
-nixos-install --flake /mnt/etc/nixos#nixos
-# definir senha root quando solicitado
-
-nixos-enter --root /mnt -c 'passwd seu-usuario'
-reboot
-```
-
-#### 6. Conectar ao Wi-Fi (pós-instalação)
-
-```bash
-nmcli d
-nmcli r wifi on
-nmcli d wifi list
-nmcli d wifi connect <nome-da-rede> password <senha>
-```
-
-#### 7. Starship
-
-```bash
-# Adicionar ao ~/.bashrc
-eval "$(starship init bash)"
-```
-
-#### 8. Git & SSH
-
-```bash
-ssh-keygen -t ed25519 -C "seu@email.com"
-
-cat ~/.ssh/id_ed25519.pub
-# GitHub → Settings → SSH and GPG keys → New SSH key → colar → Add
-```
-
-#### 9. Bluetooth
-
-```bash
-sudo systemctl enable --now bluetooth.service
-bluetoothctl
-```
-
-```
-power on
-agent on
-default-agent
-scan on
-devices
-trust <device-id>
-pair <device-id>
-connect <device-id>
+# reinicia
+systemctl --user restart xdg-desktop-portal
 ```
