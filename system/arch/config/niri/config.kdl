@@ -1,13 +1,4 @@
 // Niri config - Arch Linux
-// Instale: yay -S niri
-// Dependências recomendadas:
-//   wpctl  -> pipewire-audio (pacman)
-//   playerctl -> pacman -S playerctl
-//   brightnessctl -> pacman -S brightnessctl
-//   orca (leitor de tela) -> pacman -S orca
-//   alacritty -> pacman -S alacritty
-//   firefox -> pacman -S firefox
-//
 // Para o shell "noctalia-shell" (spawn-at-startup abaixo),
 // substitua pelo seu launcher preferido, ex: waybar, eww, ags, etc.
 
