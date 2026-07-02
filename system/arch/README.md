@@ -167,3 +167,24 @@ sudo pacman -S nodejs npm
 # cypress
 sudo pacman -S gtk3 libnotify nss libxtst xorg-server-xvfb at-spi2-core libxss alsa-lib
 ```
+
+`aseprite`
+
+```bash
+
+# instalar
+paru -S aseprite
+paru -S xwayland-satellite
+
+# editar
+helix ~/.config/niri/config.kdl
+
+# adicionar
+spawn-at-startup "xwayland-satellite"
+
+# display=:0
+echo 'export DISPLAY=:0' >> ~/.bashrc
+source ~/.bashrc
+```
+
+> Se usa zsh, troca `~/.bashrc` por `~/.zshrc`.
