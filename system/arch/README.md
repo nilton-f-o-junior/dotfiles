@@ -63,7 +63,7 @@ qs -c noctalia-shell
 helix ~/.config/user-dirs.dirs
 
 XDG_DESKTOP_DIR="$HOME"
-XDG_DOWNLOAD_DIR="$HOME/down"
+XDG_DOWNLOAD_DIR="$HOME"
 XDG_TEMPLATES_DIR="$HOME"
 XDG_PUBLICSHARE_DIR="$HOME"
 XDG_DOCUMENTS_DIR="$HOME"
