@@ -217,3 +217,29 @@ sudo nmcli connection down "NOME_DA_SUA_CONEXAO" && sudo nmcli connection up "NO
 ```bash
 sudo pacman -Rsn nano htop foot wmenu vim fuzzel rofi swaybg swayidle swaylock waybar
 ```
+
+`Nautilus`
+
+```bash
+# install
+sudo pacman -S xdg-desktop-portal-gtk
+
+# conf
+# ~/.config/xdg-desktop-portal/portals.conf
+# [preferred]
+# default=gtk
+# org.freedesktop.impl.portal.FileChooser=gtk
+
+# dbus
+mkdir -p ~/.local/share/dbus-1/services/
+ln -s /dev/null ~/.local/share/dbus-1/services/org.freedesktop.FileManager1.service
+
+# remove
+sudo pacman -R xdg-desktop-portal-gnome nautilus
+
+# verifica
+sudo pacman -S --needed xdg-desktop-portal-gtk
+
+# reinicia
+systemctl --user restart xdg-desktop-portal
+```
