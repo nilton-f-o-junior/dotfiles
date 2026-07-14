@@ -2,8 +2,6 @@
     <img src="img/dotfiles-logo.png">
 </p>
 
-# Dotfiles
-
 Configurações pessoais organizadas por sistema operacional, mantidas dentro da pasta `system/`:
 
 - **`system/arch`** — setup completo do Arch Linux com Niri e Noctalia Shell
