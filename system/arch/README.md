@@ -27,7 +27,6 @@ nmcli d wifi connect <name> password <password>
 ```bash
 sudo pacman -Syu
 sudo pacman -S git helix starship eza
-sudo pacman -Rsn nano htop foot wmenu vim fuzzel rofi swaybg swayidle swaylock waybar
 
 sudo pacman -S nerd-fonts
 # JetBrains (44) + Nerd Font Icons (54)
@@ -45,7 +44,7 @@ yay -S aseprite
 `paru`
 
 ```bash
-sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si
+
 ```
 
 `noctalia`
@@ -168,12 +167,13 @@ sudo pacman -S nodejs npm
 sudo pacman -S gtk3 libnotify nss libxtst xorg-server-xvfb at-spi2-core libxss alsa-lib
 ```
 
-`aseprite`
+`aseprite e krita`
 
 ```bash
 
 # instalar
 paru -S aseprite
+paru -S krita
 paru -S xwayland-satellite
 
 # editar
@@ -188,3 +188,28 @@ source ~/.bashrc
 ```
 
 > Se usa zsh, troca `~/.bashrc` por `~/.zshrc`.
+
+`Linux usar a Hora Local`
+
+```bash
+# ativar
+sudo timedatectl set-local-rtc 1 --adjust-system-clock
+
+# iniciar no boot
+sudo systemctl enable systemd-timesyncd
+sudo systemctl start systemd-timesyncd
+```
+
+`Servidores DNS`
+
+```bash
+nmcli connection show
+sudo nmcli connection modify "NOME_DA_SUA_CONEXAO" ipv4.dns "1.1.1.1 8.8.8.8" ipv4.ignore-auto-dns yes
+sudo nmcli connection down "NOME_DA_SUA_CONEXAO" && sudo nmcli connection up "NOME_DA_SUA_CONEXAO"
+```
+
+`Remover`
+
+```bash
+sudo pacman -Rsn nano htop foot wmenu vim fuzzel rofi swaybg swayidle swaylock waybar
+```
