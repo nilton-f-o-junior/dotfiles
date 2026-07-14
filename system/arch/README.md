@@ -191,8 +191,6 @@ echo 'export DISPLAY=:0' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-> Se usa zsh, troca `~/.bashrc` por `~/.zshrc`.
-
 `Linux usar a Hora Local`
 
 ```bash
