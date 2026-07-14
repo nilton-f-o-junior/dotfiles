@@ -152,10 +152,11 @@ cp /usr/share/applications/cmake-gui.desktop \
    /usr/share/applications/nm-connection-editor.desktop \
    /usr/share/applications/qv4l2.desktop \
    /usr/share/applications/qvidcap.desktop \
+   /usr/share/applications/lstopo.desktop \
    ~/.local/share/applications/
 
-#
-for f in cmake-gui avahi-discover bssh bvnc nm-connection-editor qv4l2 qvidcap; do
+# Adicionar NoDisplay=true
+for f in cmake-gui avahi-discover bssh bvnc nm-connection-editor qv4l2 qvidcap lstopo; do
   echo -e "\nNoDisplay=true" >> ~/.local/share/applications/$f.desktop
 done
 ```
