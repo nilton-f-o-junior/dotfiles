@@ -1,4 +1,4 @@
-# arch - niri
+# arch
 
 `install`
 
@@ -179,6 +179,7 @@ sudo pacman -S gtk3 libnotify nss libxtst xorg-server-xvfb at-spi2-core libxss a
 paru -S aseprite
 paru -S krita
 paru -S xwayland-satellite
+paru -S wezterm-nightly-bin
 
 # editar
 helix ~/.config/niri/config.kdl
