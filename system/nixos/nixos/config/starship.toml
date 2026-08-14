@@ -1,0 +1,108 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+palette = 'tui'
+
+add_newline = true
+
+format = """
+[](pink)\
+$os\
+
+[](bg:peach fg:pink)\
+$directory\
+
+[](fg:peach bg:purple)\
+$git_branch\
+$git_status\
+
+[](fg:purple bg:teal)\
+$rust\
+$python\
+
+[](fg:teal bg:wine)\
+$docker_context\
+$conda\
+$pixi\
+
+[](fg:wine bg:dark)\
+$time\
+
+[ ](fg:dark)\
+$line_break$character"""
+
+
+[palettes.tui]
+light_pink = '#fde6ee'
+peach      = '#f6cdcb'
+pink       = '#ff3e8b'
+purple     = '#ae72d4'
+teal       = '#527e81'
+wine       = '#76445f'
+dark       = '#47324E'
+yellow     = '#fbbf2d'
+
+
+[os]
+disabled = false
+format = "[$symbol]($style)"
+style = "bg:pink fg:light_pink"
+
+
+[os.symbols]
+NixOS = "󰼁 "
+
+
+[username]
+show_always = true
+style_user = "bg:pink fg:light_pink"
+style_root = "bg:pink fg:light_pink"
+format = '[ $user ]($style)'
+
+
+[directory]
+style = "fg:pink bg:peach"
+format = "[ $path ]($style)"
+truncation_length = 3
+
+
+[git_branch]
+symbol = ""
+style = "bg:purple"
+format = '[[ $symbol $branch ](fg:light_pink bg:purple)]($style)'
+
+
+[git_status]
+style = "bg:purple"
+format = '[[($all_status$ahead_behind )](fg:light_pink bg:purple)]($style)'
+
+
+[rust]
+symbol = " "
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:peach bg:teal)]($style)'
+
+
+[python]
+symbol = ""
+style = "bg:teal"
+format = '[[ $symbol( $version) ](fg:peach bg:teal)]($style)'
+
+
+[docker_context]
+symbol = ""
+style = "bg:wine"
+format = '[[ $symbol( $context) ](fg:light_pink bg:wine)]($style)'
+
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:dark"
+format = '[[ $time ](fg:light_pink bg:dark)]($style)'
+
+
+[character]
+disabled = false
+success_symbol = '[](bold fg:pink)'
+error_symbol = '[](bold fg:yellow)'
+vimcmd_symbol = '[](bold fg:color]'

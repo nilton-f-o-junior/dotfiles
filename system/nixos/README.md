@@ -1,3 +1,20 @@
+# NixOs
+
+## Graphical - ISO
+
+- Delete partitions
+- Create partitions
+  - boot:
+    - 1024MB
+    - fat32
+    - /boot
+  - root:
+    - all
+    - btrfs
+    - /root
+
+## Minimal - ISO
+
 `install`
 
 ```bash
@@ -45,6 +62,8 @@ nixos-enter --root /mnt -c ´passwd user´
 reboot
 ```
 
+## Configuração
+
 `connect`
 
 ```bash
@@ -52,35 +71,35 @@ nmcli d
 nmcli r wifi on
 nmcli d wifi list
 nmcli d wifi connect <name> password <password>
-```          
+```
+
+`starship`
              
-`starship`   
-             
-```bash      
+```bash
 helix ~/.bashrc
 eval "$(starship init bash)"
-```          
+```
+          
+`git`
              
-`git`        
-             
-```bash      
-# config     
+```bash
+# config
 ssh-keygen -t ed25519 -C "your_email@example.com"
              
 # enter ... enter
              
-cd           
+cd
 cd .ssh/ > acess id_ed25519.pub
 more id_ed25519.pub
              
-# git        
+# git
 # copy > github > settings > SSH and GPG keys > new SSH > paste > add
 github > create repository > copy > SSH git@github.com: ... > paste git clone git@github.com: ... > yes
-```          
-             
+```
+
 `bluetooth`  
              
-```bash      
+```bash
 # config     
 sudo systemctl start bluetooth.service
 sudo systemctl enable bluetooth.service

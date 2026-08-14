@@ -1,0 +1,43 @@
+# Theme
+theme = "catppuccin_mocha"
+
+
+# Editor settings
+[editor]
+  mouse = false
+  auto-completion = true
+  auto-save = true
+  auto-format = true
+  text-width = 80
+  gutters = ["diagnostics", "spacer"]
+  soft-wrap.enable = true
+  soft-wrap.max-indent-retain = 80
+  end-of-line-diagnostics = "hint"
+
+
+# Inline diagnostics
+[editor.inline-diagnostics]
+  cursor-line = "error"
+
+
+# File picker
+[editor.file-picker]
+  hidden = false
+
+
+# Status line
+[editor.statusline]
+  left = ["mode", "spinner", "file-modification-indicator", "read-only-indicator"]
+  center = ["file-name"]
+  right = ["diagnostics", "register", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+  separator = "│"
+  mode.normal = "LOCKED"
+  mode.insert = "WORKING"
+  mode.select = "VISUAL SEL"
+
+
+# LSP support
+[editor.lsp]
+  enable = true
+  auto-signature-help = true
+  display-messages = true

@@ -1,111 +1,142 @@
-# config
-
+#
 { config, lib, pkgs, ... }:
 
+let
+  pkgs-unstable = import <nixos-unstable> {
+    config.allowUnfree = true;
+  };
+in
 {
   imports =
-    [ 
+    [
       ./hardware-configuration.nix
     ];
 
-  # Use the systemd-boot EFI boot loader
+
+  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
 
-  # Host 
-  networking.hostName = "nixos";
-
-
-  # Configure network
-  networking.networkmanager.enable = true;
-
-
-  # Set your time zone
-  time.timeZone = "America/Recife";
-
-
-  # Configure network
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-
-  # Select internationalisation properties
-  i18n.defaultLocale = "en_US.UTF-8";
-  # i18n.defaultLocale = "pt_BR.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
-
-
-  # Display
+  # Tile WIndows Manager
   services.displayManager.ly.enable = true;
-  programs.niri.enable = true;
   programs.xwayland.enable = true;
+  # programs.niri.enable = true;
+  programs.niri = {
+    enable = true;
+    useNautilus = false;
+  };
 
 
   # Wayland
   xdg.portal = {
-     enable = true;
-     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-     config.common.default = "gtk";
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = "gtk";
   };
 
 
-  # Bluetooth
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  
-
-  # Enable sound
-  services.pipewire = {
-     enable = true;
-     alsa.enable = true;
-     pulse.enable = true;
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "intl";
   };
 
 
-  # Define a user account
-  users.users.user = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" ];
-     packages = with pkgs; [
-       tree
-     ];
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users."user" = {
+    isNormalUser = true;
+    description = "user";
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [ tree ];
   };
 
 
-  # List packages installed in system profile
-  environment.systemPackages = with pkgs; [
-     #
-     firefox
-     git
-     helix
-     wget
-     wezterm
-  ];
+  # Set your time zone.
+  time.timeZone = "America/Fortaleza";
+
+  #
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  #i18n.extraLocaleSettings = {
+  #  LC_ADDRESS = "pt_BR.UTF-8";
+  #  LC_IDENTIFICATION = "pt_BR.UTF-8";
+  #  LC_MEASUREMENT = "pt_BR.UTF-8";
+  #  LC_MONETARY = "pt_BR.UTF-8";
+  #  LC_NAME = "pt_BR.UTF-8";
+  #  LC_NUMERIC = "pt_BR.UTF-8";
+  #  LC_PAPER = "pt_BR.UTF-8";
+  #  LC_TELEPHONE = "pt_BR.UTF-8";
+  #  LC_TIME = "pt_BR.UTF-8";
+  #};
+
+
+  # Networking
+  networking.hostName = "nixos";
+  networking.wireless.enable = true;
+  networking.networkmanager.enable = true;
+
+
+  # DNS
+  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
+  networking.networkmanager.insertNameservers = ["1.1.1.1" "8.8.8.8"];
 
 
   # Fonts
   fonts.packages = with pkgs; [
-     nerd-fonts.jetbrains-mono
+    nerd-fonts.jetbrains-mono
   ];
 
 
-  # Settings
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # bash
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+      collegarb = "sudo nix-collect-garbage -d";
+      rebuild   = "sudo nixos-rebuild switch";
+    };
+  };
 
- 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  programs.bash.interactiveShellInit = ''
+    eval "$(starship init bash)"
+  '';
 
 
-  # Allow
-  nixpkgs.config.allowUnfree = true;
-  
-  
+  environment.sessionVariables = {
+    QT_QPA_PLATFORM = "wayland;xcb";
+  };
+
+
+  # Packages
+  environment.systemPackages = with pkgs; [
+
+    # Web Browsers & Communication
+    firefox
+
+    # Terminal Utilities & Shell Tools
+    curl
+    eza   
+    fastfetch
+    git
+    wget
+
+    # Editors & Terminal Emulators
+    helix
+    opencode
+    starship
+    wezterm
+
+    # Graphics & Design
+    krita
+
+  ] ++ (with pkgs-unstable; [
+
+    #
+    noctalia
+
+  ]);
+
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -115,6 +146,42 @@
   # };
 
 
+  # List services that you want to enable:
+
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
+
+  # Sound
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+  };
+
+
+  # SSH
+  services.openssh.enable = true;
+
+
+  # Allow
+  nixpkgs.config.allowUnfree = true;
+
+
+  # Docker
+  virtualisation.docker.enable = true;
+
+
+  # Configure network proxy if necessary
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+
+  # Enable the OpenSSH daemon.
+  # services.openssh.enable = true;
+
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -122,7 +189,6 @@
   # networking.firewall.enable = false;
 
 
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 
 }
