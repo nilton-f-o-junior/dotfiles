@@ -115,24 +115,23 @@ in
 
     # Terminal Utilities & Shell Tools
     curl
-    eza   
+    eza
     fastfetch
     git
     wget
 
     # Editors & Terminal Emulators
-    helix
-    opencode
     starship
     wezterm
 
-    # Graphics & Design
-    krita
-
   ] ++ (with pkgs-unstable; [
 
-    #
+    # Desktop
     noctalia
+
+    # Terminal
+    opencode
+    neovim
 
   ]);
 
