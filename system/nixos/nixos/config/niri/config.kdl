@@ -59,7 +59,7 @@ layout {
 
 
 // Startup
-spawn-at-startup "noctalia" "run" "--daemon"
+spawn-at-startup "noctalia"
 
 
 // Screenshots
@@ -67,12 +67,12 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 
 // Window Rules
-window-rule { 
+window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     match app-id="org.wezfurlong.wezterm"
 
     background-effect {
-        blur true    
+        blur true
     }
 }
 
@@ -98,14 +98,14 @@ binds {
     Super+Alt+I hotkey-overlay-title="Gmail" { spawn "firefox" "https://mail.google.com/mail/u/0/#inbox"; }
     Super+Alt+N hotkey-overlay-title="NotebookLLM" { spawn "firefox" "https://notebooklm.google.com/"; }
     Super+Alt+Y hotkey-overlay-title="Youtube" { spawn "firefox" "https://www.youtube.com"; }
-    
+
 
     // Apps & System
     Mod+T hotkey-overlay-title="Terminal: Wezterm" { spawn "wezterm"; }
     Mod+S { spawn-sh "noctalia msg panel-toggle launcher"; }
     Alt+Tab { spawn-sh "noctalia msg window-switcher"; }
-    Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }    
-    
+    Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
+
 
     // Audio Control
     XF86AudioRaiseVolume { spawn-sh "noctalia msg volume-up"; }
