@@ -1,0 +1,113 @@
+[bar.default]
+auto_hide = true
+position = "bottom"
+reserve_space = false
+
+[control_center]
+sidebar = "full"
+sidebar_section = "full"
+
+[dock]
+active_monitor_only = true
+concave_edge_corners = false
+enabled = true
+layer = "overlay"
+position = "top"
+show_instance_count = false
+show_running = false
+smart_auto_hide = true
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@DP-1", "lockscreen-login-box@HDMI-A-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 621.0
+    cy = 516.0
+    output = "DP-1"
+    placement_height = 698.0
+    placement_width = 1242.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_password_reveal = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 1477.0
+    cy = 1480.0
+    output = "HDMI-A-1"
+    placement_height = 1662.0
+    placement_width = 2954.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_password_reveal = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[shell.panel]
+borders = false
+shadow = false
+
+[shell.screenshot]
+directory = "/home/user/user/pictures/screenshot"
+
+[theme]
+builtin = "Catppuccin"
+source = "wallpaper"
+
+    [theme.templates]
+    enable_builtin_templates = false
+
+[wallpaper]
+directory = "/home/user/user/pictures/background"
+
+    [wallpaper.default]
+    path = "/home/user/user/pictures/background/christian-benavides-cat.jpg"
+
+    [wallpaper.last]
+    path = "/home/user/user/pictures/background/christian-benavides-cat.jpg"
+
+    [wallpaper.monitors.DP-1]
+    path = "/home/user/user/pictures/background/christian-benavides-cat.jpg"
+
+    [wallpaper.monitors.HDMI-A-1]
+    path = "/home/user/user/pictures/background/christian-benavides-cat.jpg"
