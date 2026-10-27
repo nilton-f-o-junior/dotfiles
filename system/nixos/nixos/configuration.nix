@@ -1,27 +1,29 @@
-#
+# NixOS configuration
 { config, lib, pkgs, ... }:
 
 let
   pkgs-unstable = import <nixos-unstable> {
     config.allowUnfree = true;
   };
+
 in
+
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
+  # Habilita suporte a Flakes e nix-command para o builtins.getFlake funcionar
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Bootloader.
+  # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
 
-  # Tile WIndows Manager
-  services.displayManager.ly.enable = true;
+  # Tiling Window Manager
+  # services.displayManager.ly.enable = true;
   programs.xwayland.enable = true;
-  # programs.niri.enable = true;
   programs.niri = {
     enable = true;
     useNautilus = false;
@@ -36,26 +38,27 @@ in
   };
 
 
-  # Configure keymap in X11
+  # Keymap
   services.xserver.xkb = {
     layout = "us";
     variant = "intl";
   };
 
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # User account. Don't forget to set a password with ‘passwd’.
   users.users."user" = {
     isNormalUser = true;
     description = "user";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [ tree ];
   };
 
 
-  # Set your time zone.
+  # Time zone
   time.timeZone = "America/Fortaleza";
 
-  #
+
+  # Locale
   i18n.defaultLocale = "en_US.UTF-8";
 
   #i18n.extraLocaleSettings = {
@@ -73,13 +76,11 @@ in
 
   # Networking
   networking.hostName = "nixos";
-  networking.wireless.enable = true;
   networking.networkmanager.enable = true;
 
 
-  # DNS
-  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
-  networking.networkmanager.insertNameservers = ["1.1.1.1" "8.8.8.8"];
+  # DNS (managed through NetworkManager)
+  networking.networkmanager.insertNameservers = [ "1.1.1.1" "8.8.8.8" ];
 
 
   # Fonts
@@ -88,7 +89,7 @@ in
   ];
 
 
-  # bash
+  # Shell
   programs.bash = {
     enable = true;
     shellAliases = {
@@ -97,13 +98,16 @@ in
     };
   };
 
-  programs.bash.interactiveShellInit = ''
-    eval "$(starship init bash)"
-  '';
+
+  # Terminal
+  programs.starship.enable = true;
 
 
+  # Wayland
   environment.sessionVariables = {
     QT_QPA_PLATFORM = "wayland;xcb";
+    NIXOS_OZONE_WL = "1";
+    XDG_CURRENT_DESKTOP = "niri";
   };
 
 
@@ -115,13 +119,11 @@ in
 
     # Terminal Utilities & Shell Tools
     curl
-    eza
-    fastfetch
     git
+    helix
     wget
 
-    # Editors & Terminal Emulators
-    starship
+    # Terminal Emulators
     wezterm
 
   ] ++ (with pkgs-unstable; [
@@ -130,8 +132,8 @@ in
     noctalia
 
     # Terminal
+    fresh-editor
     opencode
-    neovim
 
   ]);
 
@@ -145,14 +147,13 @@ in
   # };
 
 
-  # List services that you want to enable:
-
   # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 
 
   # Sound
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -164,7 +165,7 @@ in
   services.openssh.enable = true;
 
 
-  # Allow
+  # Allow unfree packages (needed for google-chrome)
   nixpkgs.config.allowUnfree = true;
 
 
@@ -172,16 +173,12 @@ in
   virtualisation.docker.enable = true;
 
 
-  # Configure network proxy if necessary
+  # Network proxy (if necessary)
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-
-  # Open ports in the firewall.
+  # Firewall
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
